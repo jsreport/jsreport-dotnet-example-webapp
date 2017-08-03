@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using jsreport.MVC;
+using jsreport.AspNetCore;
 using jsreport.Local;
 using jsreport.Binary;
 

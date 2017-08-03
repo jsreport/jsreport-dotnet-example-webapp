@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.Model;
-using jsreport.MVC;
+using jsreport.AspNetCore;
 using jsreport.Types;
 using System.Threading.Tasks;
 
