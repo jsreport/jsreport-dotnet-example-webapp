@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PackageTargetFallback>%3bnet461%3bportable-net45+win8</PackageTargetFallback>
+    <TargetFramework>netcoreapp2.0</TargetFramework>    
   </PropertyGroup>
 
   <ItemGroup>
