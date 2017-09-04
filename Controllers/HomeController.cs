@@ -44,7 +44,7 @@ namespace WebApp.Controllers
 
             HttpContext.JsReportFeature()
                 .Recipe(Recipe.PhantomPdf)
-                .Configure((r) => r.Template.Phantom.Header = header);
+                .Configure((r) => r.Template.Phantom = new Phantom { Header = header });
 
             return View("Invoice", InvoiceModel.Example());
         }
