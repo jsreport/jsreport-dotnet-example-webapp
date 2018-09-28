@@ -23,7 +23,7 @@ namespace WebApp.Controllers
         [MiddlewareFilter(typeof(JsReportPipeline))]
         public IActionResult Invoice()
         {
-            HttpContext.JsReportFeature().Recipe(Recipe.PhantomPdf);
+            HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf);
 
             return View(InvoiceModel.Example());
         }
@@ -31,7 +31,7 @@ namespace WebApp.Controllers
         [MiddlewareFilter(typeof(JsReportPipeline))]
         public IActionResult InvoiceDownload()
         {
-            HttpContext.JsReportFeature().Recipe(Recipe.PhantomPdf)
+            HttpContext.JsReportFeature().Recipe(Recipe.ChromePdf)
                 .OnAfterRender((r) => HttpContext.Response.Headers["Content-Disposition"] = "attachment; filename=\"myReport.pdf\"");
 
             return View("Invoice", InvoiceModel.Example());
@@ -43,8 +43,15 @@ namespace WebApp.Controllers
             var header = await JsReportMVCService.RenderViewToStringAsync(HttpContext, RouteData, "Header", new { });
 
             HttpContext.JsReportFeature()
-                .Recipe(Recipe.PhantomPdf)
-                .Configure((r) => r.Template.Phantom = new Phantom { Header = header });
+                .Recipe(Recipe.ChromePdf)
+                .Configure((r) => r.Template.Chrome = new Chrome {
+                    HeaderTemplate = header,
+                    DisplayHeaderFooter = true,
+                    MarginTop = "1cm",
+                    MarginLeft = "1cm",
+                    MarginBottom = "1cm",
+                    MarginRight = "1cm"
+                });
 
             return View("Invoice", InvoiceModel.Example());
         }
@@ -52,8 +59,9 @@ namespace WebApp.Controllers
         [MiddlewareFilter(typeof(JsReportPipeline))]
         public IActionResult Items()
         {
-            HttpContext.JsReportFeature()                
-                .Recipe(Recipe.HtmlToXlsx);
+            HttpContext.JsReportFeature()
+                .Recipe(Recipe.HtmlToXlsx)
+                .Configure((r) => r.Template.HtmlToXlsx = new HtmlToXlsx() { HtmlEngine = "chrome" });
 
             return View(InvoiceModel.Example());
         }
@@ -63,7 +71,8 @@ namespace WebApp.Controllers
         {
             HttpContext.JsReportFeature()
                 .Configure(req => req.Options.Preview = true)
-                .Recipe(Recipe.HtmlToXlsx);
+                .Recipe(Recipe.HtmlToXlsx)
+                .Configure((r) => r.Template.HtmlToXlsx = new HtmlToXlsx() { HtmlEngine = "chrome" });
 
             return View("Items", InvoiceModel.Example());
         }
@@ -73,7 +82,7 @@ namespace WebApp.Controllers
         {
             HttpContext.JsReportFeature()
                 .DebugLogsToResponse()
-                .Recipe(Recipe.PhantomPdf);
+                .Recipe(Recipe.ChromePdf);
 
             return View("Invoice", InvoiceModel.Example());
         }
