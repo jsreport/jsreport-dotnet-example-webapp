@@ -3,6 +3,7 @@ using WebApp.Model;
 using jsreport.AspNetCore;
 using jsreport.Types;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace WebApp.Controllers
 {
@@ -83,6 +84,33 @@ namespace WebApp.Controllers
             HttpContext.JsReportFeature()
                 .DebugLogsToResponse()
                 .Recipe(Recipe.ChromePdf);
+
+            return View("Invoice", InvoiceModel.Example());
+        }
+
+
+        [MiddlewareFilter(typeof(JsReportPipeline))]
+        public async Task<IActionResult> InvoiceWithCover()
+        {
+            var coverHtml = await JsReportMVCService.RenderViewToStringAsync(HttpContext, RouteData, "Cover", new { });
+            HttpContext.JsReportFeature()              
+                .Recipe(Recipe.ChromePdf)
+                .Configure((r) =>
+                {
+                    r.Template.PdfOperations = new[]
+                    {
+                        new PdfOperation()
+                        {
+                            Template = new Template
+                            {
+                                Content = coverHtml,
+                                Engine = Engine.None,
+                                Recipe = Recipe.ChromePdf
+                            },
+                            Type = PdfOperationType.Prepend
+                        }
+                    };
+                });
 
             return View("Invoice", InvoiceModel.Example());
         }
