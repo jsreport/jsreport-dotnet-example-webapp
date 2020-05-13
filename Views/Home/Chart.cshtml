@@ -1,0 +1,42 @@
+﻿<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js'></script>
+</head>
+<body>
+
+    <canvas id='myChart' style="margin-top:30px"></canvas>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                datasets: [{
+                    label: 'apples',
+                    data: [12, 19, 3, 17, 6, 3, 7],
+                    backgroundColor: "rgba(153,255,51,0.4)"
+                }, {
+                    label: 'oranges',
+                    data: [2, 29, 5, 5, 2, 3, 10],
+                    backgroundColor: "rgba(255,153,0,0.4)"
+                }]
+            },
+            options: {
+                animation: {
+                    onComplete: function () {
+                        // set the PDF printing trigger when the animation is done
+                        // to have this working, the phantom-pdf menu in the left must
+                        // have the wait for printing trigger option selected
+                        window.JSREPORT_READY_TO_START = true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+

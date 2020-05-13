@@ -114,5 +114,21 @@ namespace WebApp.Controllers
 
             return View("Invoice", InvoiceModel.Example());
         }
+
+        [MiddlewareFilter(typeof(JsReportPipeline))]
+        public async Task<IActionResult> ChartWithPrintTrigger()
+        {
+            HttpContext.JsReportFeature()
+                .Recipe(Recipe.ChromePdf)
+                .Configure(cfg =>
+                {
+                    cfg.Template.Chrome = new Chrome
+                    {
+                        WaitForJS = true
+                    };
+                });
+
+            return View("Chart", new { });
+        }
     }
 }
