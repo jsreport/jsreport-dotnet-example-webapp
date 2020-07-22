@@ -18,8 +18,8 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Local" Version="2.2.2" />
-        <PackageReference Include="jsreport.Binary" Version="2.7.1" />
+        <PackageReference Include="jsreport.Local" Version="2.2.3" />
+        <PackageReference Include="jsreport.Binary" Version="2.9.0" />
         <PackageReference Include="jsreport.AspNetCore" Version="2.1.0" />
       </ItemGroup>
     </Otherwise>
