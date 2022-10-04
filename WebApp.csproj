@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>    
+    <TargetFramework>net6.0</TargetFramework>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,9 +18,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="jsreport.Local" Version="2.2.2" />
-        <PackageReference Include="jsreport.Binary" Version="2.7.1" />
-        <PackageReference Include="jsreport.AspNetCore" Version="2.1.0" />
+        <PackageReference Include="jsreport.Local" Version="3.8.0" />
+        <PackageReference Include="jsreport.AspNetCore" Version="3.8.0" />
+		<PackageReference Include="jsreport.Binary" Version="3.8.0" />
       </ItemGroup>
     </Otherwise>
   </Choose>

@@ -79,17 +79,6 @@ namespace WebApp.Controllers
         }
 
         [MiddlewareFilter(typeof(JsReportPipeline))]
-        public IActionResult InvoiceDebugLogs()
-        {
-            HttpContext.JsReportFeature()
-                .DebugLogsToResponse()
-                .Recipe(Recipe.ChromePdf);
-
-            return View("Invoice", InvoiceModel.Example());
-        }
-
-
-        [MiddlewareFilter(typeof(JsReportPipeline))]
         public async Task<IActionResult> InvoiceWithCover()
         {
             var coverHtml = await JsReportMVCService.RenderViewToStringAsync(HttpContext, RouteData, "Cover", new { });
