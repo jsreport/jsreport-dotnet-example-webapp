@@ -8,6 +8,10 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.3.2" />
+  </ItemGroup>
+
   <Choose>
     <When Condition=" '$(SolutionName)' == 'jsreport.development' ">
       <ItemGroup>

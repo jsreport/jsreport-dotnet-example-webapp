@@ -1,0 +1,75 @@
+﻿<style>
+    .toc-title {
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .toc-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1px dashed rgb(200, 200, 200);
+        width: 100%;
+    }
+
+    .toc-content a {
+       width: 100%;
+    }
+
+    .toc-content a > span {
+       float: right;
+    }
+
+    .toc li {
+        list-style: none;
+        padding-bottom: 5px;
+    }
+
+    .toc ul {
+        font-size: 20px;
+        font-family: arial;
+    }
+
+    .toc ul ul,
+    .toc ul ul span {
+        font-size: 0.8em;
+    }
+
+    .toc ul {
+        padding-left: 0em;
+    }
+
+    .toc ul ul {
+        padding-left: 15px;
+    }
+
+    .toc a {
+        text-decoration: none;
+        color: black;
+    }
+</style>
+
+<div class='toc'>
+    <h1 class='toc-title'>Table of contents</h1>
+    <ul class='toc'>
+        {{#toc}}
+        <li>
+            <div class='toc-content'>
+                <a href='#{{id}}' data-pdf-outline data-pdf-outline-title='{{content}}' data-pdf-outline-parent='{{parent}}'>
+                    {{content}}
+                    <span>{{pageNumber}}</span>
+                </a>
+            </div>
+        </li>
+        {{/toc}}
+    </ul>
+</div>
+
+<div style="page-break-before: always;"></div>
+
+<div>
+    {{{heading "h1" id="title1" content="some title"}}}
+</div>
+<div>
+    {{{heading "h2" id="title2" content="some title2" parent="title1"}}}
+</div>
